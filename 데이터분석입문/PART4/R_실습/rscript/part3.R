@@ -69,8 +69,8 @@
     
   # prop.table( ) 함수로 행 백분율, 열 백분율 계산하기
   prop.table(table_TWO)
-  prop.table(table_TWO, 1)
-  prop.table(table_TWO, 2)
+  prop.table(table_TWO, 1) # 1은 행을 의미한다.
+  prop.table(table_TWO, 2) # 2는 열을 의미한다.
     
     ## 아무것도 없으면 전체, 1은 행, 2는 열 백분율 계산
   
@@ -212,7 +212,7 @@
 
     ## 구간 경계값 지정
   
-  
+  TWO_VAR2
   SCORE_GRP = cut(TWO_VAR2$SCORE, breaks=breaks)
     
     ## cut(수치형변수, breaks=구간경계값)
