@@ -76,9 +76,12 @@
   
     
   # 회귀 계수 계산하기 
+    
+  # 상관계수를 활용해서 상관계수 계산하기
   r_fs = cor(heights$father, heights$son)
   r_fs
 
+  # 아빠키와 아들키의 표준편차를 계산하기기
   sd_f = sd(heights$father)
   sd_s = sd(heights$son)
   
@@ -95,8 +98,8 @@
 
 
   # 회귀계수를 활용한 예측
-  b0 + b1*170
-  b0 + b1*180
+  b0 + b1*170 # 아빠키가 170일 때 
+  b0 + b1*180 # 아빠키가 180일 때
 
 
 
