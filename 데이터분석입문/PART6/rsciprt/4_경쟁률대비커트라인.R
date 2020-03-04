@@ -10,6 +10,8 @@ plot(compet$경쟁률, compet$커트라인점수, pch=16, col='#3377BB77')
 abline(v=mean(compet$경쟁률), lty=2)
 abline(h=mean(compet$커트라인점수),lty=2)
 
+which.min(compet$경쟁률)
+compet[7, ]
 # 경쟁률이 낮을수록 커트라인은 낮고 
 # 경쟁률이 높을수록 커트라인이 높다.
 
