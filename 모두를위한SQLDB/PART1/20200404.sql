@@ -228,10 +228,54 @@ select
 		group by cust_grade
 		order by group_cnt desc limit 1
 	) a) as max_cust_grade;
+
 -- 선생님이 한거
+/*카티션 곱의 법칙에 따라 9 * 1 * 1 * 1 = 9가 나온다*/
 select 
-	avg(cnt)
-from (
-	select cust_grade, count(*) cnt from tb_movie_cust a
-	group by cust_grade
-) a;
+	count(*) "전사고객수",
+	count(distinct cust_grade) "등급의개수",
+	round(max(avg_by_grade), 2) "등급별평균고객수",
+	max(max_by_grade) "등급별최대고객수",
+	max(min_by_grade) "등급별최소고객수",
+	max(grade_by_min_emp_count) "최소고객수의등급",
+	max(grade_by_max_emp_count) "최대고객수의등급"
+from tb_movie_cust,
+(
+	select 
+		avg(cnt) avg_by_grade,
+		max(cnt) max_by_grade,
+		min(cnt) min_by_grade
+	from (
+		select 
+			count(*) cnt 
+		from tb_movie_cust a
+		group by cust_grade
+	) b
+) b,
+(
+	select 
+		cust_grade as grade_by_min_emp_count
+	from ( 
+		select 
+			cust_grade,
+			count(*) cnt
+		from tb_movie_cust
+		group by cust_grade
+		order by cnt
+	) c
+	limit 1
+) c,
+(
+	select 
+		cust_grade as grade_by_max_emp_count
+	from ( 
+		select 
+			cust_grade,
+			count(*) cnt
+		from tb_movie_cust
+		group by cust_grade
+		order by cnt desc
+	) d
+	limit 1
+) d
+-- 인라인뷰로 하면됨 그냥 1*1 = 1이니까
